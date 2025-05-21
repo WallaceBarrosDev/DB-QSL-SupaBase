@@ -1,21 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
-import express, { Request, Response } from 'express';
-import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import dotEnv from 'dotenv';
 
 const app = express();
-const PORT: number = 3000
-dotenv.config();
+app.use(cors());
+app.use(express.json());
+dotEnv.config();
 
-const supabaseURL = process.env.SUPABASE_URL as string
-const supabaseKey = process.env.SUPABASE_KEY as string
-const supabase = createClient(supabaseURL, supabaseKey);
-
-app.get('/', async (_req: Request, res: Response) => {
-    const { data, error } = await supabase.from("Usuarios").select("*");
-    if (error) { res.json({message: error}); return; };    
-    res.json(data);
+const PORT:string = process.env.PORT || '3000';
+app.listen(PORT, ()=>{
+    console.log(`port is ${PORT}`);
 });
-
-app.listen(PORT, () => {
-    console.log("server na porta:" + PORT);
-})
