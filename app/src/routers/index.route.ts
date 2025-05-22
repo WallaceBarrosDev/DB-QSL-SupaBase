@@ -7,5 +7,6 @@ const indexControler = new IndexController
 indexRouter.get('/', indexControler.get)
 indexRouter.get('/:email', indexControler.getUser)
 indexRouter.post('/', indexControler.post)
+indexRouter.delete('/:email', indexControler.delete)
 
 export default indexRouter

@@ -11,8 +11,12 @@ export default class IndexModel {
         return supabase.from("Usuarios").select("*").eq("email", email).single();
     }
 
-    public async insert() {
-        return await supabase.from("Usuarios").insert(this.datateste())
+    public insert() {
+        return supabase.from("Usuarios").insert(this.datateste())
+    }
+
+    public delete(email: string) {
+        return supabase.from("Usuarios").delete().eq("email", email)
     }
 
     private datateste(): UserLocal {

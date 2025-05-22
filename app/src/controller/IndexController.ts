@@ -26,4 +26,11 @@ export default class IndexController {
         if (error) { res.json({message: error}); return }
         res.json({message: "Usuario cirado"});
     }
+
+    public delete = async (req: Request, res: Response) => {
+        const email = req.params.email;
+        const { data, error } = await this._indexModel.delete(email);
+        if (error) { res.json({error: error}); return};
+        res.json({message: `Usuairio do email: ${email}, Deletado`});
+    }
 }
