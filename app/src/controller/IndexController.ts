@@ -23,10 +23,18 @@ export default class IndexController {
     }
 
     public insertUser = async (req: Request, res: Response) => {
-        const user: UserLocal = req.body.user;
+        const user: UserLocal = req.body;
         const { data, error } =  await this._indexModel.insertNew(user);
         if (error) { res.json({message: error}); return }
         res.json({message: "Usuario cirado"});
+    }
+
+    public updateName = async (req: Request, res: Response) => {
+        const email = req.params.email
+        const { newName } = req.body        
+        const { data, error } =  await this._indexModel.updateByEmail(newName, email);
+        if (error) { res.json({message: error}); return }
+        res.json({message: "Nome do usuario atualizado"});
     }
 
     public deleteUser = async (req: Request, res: Response) => {

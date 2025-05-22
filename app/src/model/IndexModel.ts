@@ -15,6 +15,10 @@ export default class IndexModel {
         return supabase.from("Usuarios").insert(user);
     }
 
+    public updateByEmail(newName: string, email: string) {
+        return supabase.from("Usuarios").update({name: newName}).eq("email", email);
+    }
+
     public deleteByEmail(email: string) {
         return supabase.from("Usuarios").delete().eq("email", email);
     }
