@@ -7,15 +7,15 @@ export default class IndexModel {
         return supabase.from("Usuarios").select("*");
     }
 
-    public select(email: string) {
+    public selectByEmail(email: string) {
         return supabase.from("Usuarios").select("*").eq("email", email).single();
     }
 
-    public insert(user: UserLocal) {
-        return supabase.from("Usuarios").insert(user)
+    public insertNew(user: UserLocal) {
+        return supabase.from("Usuarios").insert(user);
     }
 
     public deleteByEmail(email: string) {
-        return supabase.from("Usuarios").delete().eq("email", email)
+        return supabase.from("Usuarios").delete().eq("email", email);
     }
 }
