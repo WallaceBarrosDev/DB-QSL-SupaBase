@@ -16,7 +16,7 @@ export default class IndexController {
 
     public post = async (_req: Request, res: Response) => {
         const { data, error } =  await this._indexModel.insert();
-        if (error) res.json({message: error});
+        if (error) { res.json({message: error}); return }
         res.json(data);
     }
 }
