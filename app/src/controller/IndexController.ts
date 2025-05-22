@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import IndexModel from "../model/IndexModel";
+import { UserLocal } from "../types";
 
 export default class IndexController {
     private _indexModel: IndexModel;
@@ -21,15 +22,16 @@ export default class IndexController {
         res.json(data); 
     }
 
-    public post = async (_req: Request, res: Response) => {
-        const { data, error } =  await this._indexModel.insert();
+    public post = async (req: Request, res: Response) => {
+        const user: UserLocal = req.body.user;
+        const { data, error } =  await this._indexModel.insert(user);
         if (error) { res.json({message: error}); return }
         res.json({message: "Usuario cirado"});
     }
 
-    public delete = async (req: Request, res: Response) => {
+    public deleteUser = async (req: Request, res: Response) => {
         const email = req.params.email;
-        const { data, error } = await this._indexModel.delete(email);
+        const { data, error } = await this._indexModel.deleteByEmail(email);
         if (error) { res.json({error: error}); return};
         res.json({message: `Usuairio do email: ${email}, Deletado`});
     }

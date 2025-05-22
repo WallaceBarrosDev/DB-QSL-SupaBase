@@ -11,21 +11,11 @@ export default class IndexModel {
         return supabase.from("Usuarios").select("*").eq("email", email).single();
     }
 
-    public insert() {
-        return supabase.from("Usuarios").insert(this.datateste())
+    public insert(user: UserLocal) {
+        return supabase.from("Usuarios").insert(user)
     }
 
-    public delete(email: string) {
+    public deleteByEmail(email: string) {
         return supabase.from("Usuarios").delete().eq("email", email)
-    }
-
-    private datateste(): UserLocal {
-        const user: UserLocal = {
-            name: 'wallace barros',
-            email: 'wallace@gmail.com',
-            password: '0987654321'
-        }
-
-        return user
     }
 }
