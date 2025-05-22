@@ -7,6 +7,10 @@ export default class IndexModel {
         return supabase.from("Usuarios").select("*");
     }
 
+    public select(email: string) {
+        return supabase.from("Usuarios").select("*").eq("email", email).single();
+    }
+
     public async insert() {
         return await supabase.from("Usuarios").insert(this.datateste())
     }

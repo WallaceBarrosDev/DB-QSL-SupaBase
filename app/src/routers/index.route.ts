@@ -5,6 +5,7 @@ const indexRouter: Router = express.Router();
 const indexControler = new IndexController
 
 indexRouter.get('/', indexControler.get)
+indexRouter.get('/:email', indexControler.getUser)
 indexRouter.post('/', indexControler.post)
 
 export default indexRouter
